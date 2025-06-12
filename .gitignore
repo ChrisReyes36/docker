@@ -1,2 +1,3 @@
 dockerfiles/node_modules/
 dockerfiles/package-lock.json
+.env
