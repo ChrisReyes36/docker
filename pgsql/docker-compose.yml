@@ -1,0 +1,34 @@
+services:
+  db_postgres:
+    container_name: postgres_database
+    image: postgres:15.1
+    volumes:
+      - pd-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=S3cr3t42025
+    networks:
+      - bases-de-datos
+
+  pg_admin:
+    depends_on:
+      - db
+    image: dpage/pgadmin4:6.17
+    ports:
+      - "8080:80"
+    volumes:
+      - pg-admin:/var/lib/pgadmin
+    environment:
+      - PGADMIN_DEFAULT_PASSWORD=S3cr3t42025
+      - PGADMIN_DEFAULT_EMAIL=aministrador@google.com
+    networks:
+      - bases-de-datos
+
+volumes:
+  pd-data:
+    external: true
+  pg-admin:
+    external: true
+
+networks:
+  bases-de-datos:
+    external: true
